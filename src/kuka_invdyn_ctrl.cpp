@@ -132,10 +132,13 @@ void KUKA_INVDYN::ctrl_loop() {
 	double Kd = 110;
 
 	while( ros::ok() ) {		
-
+											
 		Eigen::VectorXd e = _initial_q->data - _q_in->data; //Keep initial position
 
+		cout << e << endl;
+
 		Eigen::VectorXd de = -_dq_in->data; //Desired velocity: 0
+
 		_dyn_param->JntToMass(*_q_in, jsim_);
 		_dyn_param->JntToCoriolis(*_q_in, *_dq_in, coriol_);
 		_dyn_param->JntToGravity(*_q_in, grav_);
